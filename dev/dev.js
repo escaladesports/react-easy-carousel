@@ -10,9 +10,9 @@ class Container extends React.Component{
 		return (
 			<main>
 				<Carousel>
-					<div>1</div>
-					<div>2</div>
-					<div>3</div>
+					<div className='first'>0</div>
+					<div className='second'>1</div>
+					<div className='third'>2</div>
 				</Carousel>
 				<style jsx>{`
 					main{
@@ -22,10 +22,23 @@ class Container extends React.Component{
 					}
 					div{
 						position: absolute;
-						top: 50%;
-						left: 50%;
-						transform: translate(-50%, -50%);
+						top: 0;
+						left: 0;
+						right: 0;
+						bottom: 0;
 						font-size: 2em;
+					}
+					.first{
+						background: black;
+						color: #fff;
+					}
+					.second{
+						background: #999;
+						color: #fff;
+					}
+					.third{
+						background: #fff;
+						color: black;
 					}
 				`}</style>
 			</main>

@@ -1,4 +1,7 @@
 import React from 'react'
+import Animate from 'react-animate-x'
+
+import animations from './animations'
 
 function cap(string){
 	return string.charAt(0).toUpperCase() + string.slice(1)
@@ -8,12 +11,13 @@ class Carousel extends React.Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			active: 1,
+			active: this.props.active,
 		}
 		this.changeSlide = this.changeSlide.bind(this)
 		this.autoChange = this.autoChange.bind(this)
 	}
 	changeSlide(newSlide){
+		console.log(`Changing to ${newSlide}`)
 		this.setState({
 			previous: this.state.active,
 			active: newSlide,
@@ -22,8 +26,8 @@ class Carousel extends React.Component {
 	autoChange(){
 		if(this.props.auto){
 			let next = this.state.active + 1
-			if(next > this.props.children.length){
-				next = 1
+			if(next >= this.props.children.length){
+				next = 0
 			}
 			this.changeSlide(next)
 			setTimeout(this.autoChange, this.props.auto)
@@ -37,24 +41,30 @@ class Carousel extends React.Component {
 	render(){
 		return (
 			<section className={`Carousel ${`CarouselAnim${cap(this.props.animation)}`}`}>
-				{this.props.children.map((child, key) => {
-					const className = ['CarouselSlide']
-					const slideKey = key + 1
-					if (slideKey === this.state.active){
-						className.push('CarouselActive')
-					}
-					else if(slideKey === this.state.previous){
-						className.push('CarouselPrevious')
-					}
-					return (
-						<article
-							key={`CarouselSlide${key}`}
-							className={className.join(' ')}
-							>
-							{ child }
-						</article>
-					)
-				})}
+				<div className='CarouselInner'>
+					<Animate
+							{...animations[this.props.animation].props}
+							duration={this.props.animationDuration}
+							id={this.state.active}
+						>
+						{state => {
+							return this.props.children.map((child, key) => (
+								<article
+										key={`CarouselSlide${key}`}
+										style={animations[this.props.animation].style({
+											state,
+											key,
+											total: this.props.children.length,
+											...this.state
+										})}
+										className='CarouselSlide'
+									>
+									{child}
+								</article>
+							))
+						}}
+					</Animate>
+				</div>
 
 				<style jsx global>{`
 					.Carousel{
@@ -63,15 +73,18 @@ class Carousel extends React.Component {
 						}
 						width: 100%;
 						height: 100%;
-						background-color: #ccc;
 						position: relative;
+						overflow: hidden;
 					}
-					.CarouselSlide{
+					.CarouselInner, .CarouselSlide{
 						position: absolute;
 						top: 0;
 						right: 0;
 						bottom: 0;
 						left: 0;
+					}
+					.CarouselInner{
+						background: ${this.props.background};
 					}
 
 					.CarouselAnimFade{
@@ -89,6 +102,18 @@ class Carousel extends React.Component {
 							z-index: 2;
 						}
 					}
+
+					.CarouselAnimSlide{
+						.CarouselSlide{
+							display: none;
+						}
+						.CarouselPrevious, .CarouselActive{
+							display: block;
+						}
+						.CarouselInner{
+
+						}
+					}
 				`}</style>
 			</section>
 		)
@@ -96,10 +121,11 @@ class Carousel extends React.Component {
 }
 
 Carousel.defaultProps = {
-	active: 1,
-	auto: 1000,
+	active: 0,
+	auto: 7000,
 	animation: 'fade',
 	animationDuration: 300,
+	background: '#fff',
 }
 
 export default Carousel
