@@ -9,7 +9,10 @@ class Container extends React.Component{
 	render(){
 		return (
 			<main>
-				<Carousel>
+				<Carousel
+						animation='slide'
+						dots
+					>
 					<div className='first'>0</div>
 					<div className='second'>1</div>
 					<div className='third'>2</div>
@@ -29,11 +32,11 @@ class Container extends React.Component{
 						font-size: 2em;
 					}
 					.first{
-						background: black;
+						background: #999;
 						color: #fff;
 					}
 					.second{
-						background: #999;
+						background: #aaa;
 						color: #fff;
 					}
 					.third{

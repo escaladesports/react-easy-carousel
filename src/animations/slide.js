@@ -4,7 +4,7 @@ export default {
 		to: 0,
 	},
 	style: ({ state, previous, active, key }) => {
-		console.log(state)
+		console.log(state, active)
 		if (active === key) {
 			return {
 				transform: `translateX(${state}%)`,

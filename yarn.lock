@@ -4937,9 +4937,9 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-animate-x@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/react-animate-x/-/react-animate-x-1.0.1.tgz#b0f7b1f9a9a19bbbeb20696377a3892f1f59d422"
+react-animate-x@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-animate-x/-/react-animate-x-1.2.0.tgz#79a766659922b810f6a06975cb63dd376ab5cbc5"
   dependencies:
     animate-x "^1.0.3"
     fast-deep-equal "^1.1.0"

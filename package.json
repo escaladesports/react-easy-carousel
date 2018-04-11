@@ -29,7 +29,7 @@
     "react-dom": "^16.1.1"
   },
   "dependencies": {
-    "react-animate-x": "^1.0.1",
+    "react-animate-x": "^1.2.0",
     "styled-jsx": "^2.2.6"
   }
 }

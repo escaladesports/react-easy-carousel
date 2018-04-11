@@ -2,6 +2,7 @@ import React from 'react'
 import Animate from 'react-animate-x'
 
 import animations from './animations'
+import Dots from './dots'
 
 function cap(string){
 	return string.charAt(0).toUpperCase() + string.slice(1)
@@ -12,6 +13,7 @@ class Carousel extends React.Component {
 		super(props)
 		this.state = {
 			active: this.props.active,
+			animating: false,
 		}
 		this.changeSlide = this.changeSlide.bind(this)
 		this.autoChange = this.autoChange.bind(this)
@@ -21,7 +23,9 @@ class Carousel extends React.Component {
 		this.setState({
 			previous: this.state.active,
 			active: newSlide,
+			animating: true,
 		})
+		this.resetTimeout()
 	}
 	autoChange(){
 		if(this.props.auto){
@@ -30,13 +34,16 @@ class Carousel extends React.Component {
 				next = 0
 			}
 			this.changeSlide(next)
-			setTimeout(this.autoChange, this.props.auto)
+		}
+	}
+	resetTimeout() {
+		clearTimeout(this.timeout)
+		if (this.props.auto) {
+			this.timeout = setTimeout(this.autoChange, this.props.auto)
 		}
 	}
 	componentDidMount(){
-		if(this.props.auto) {
-			setTimeout(this.autoChange, this.props.auto)
-		}
+		this.resetTimeout()
 	}
 	render(){
 		return (
@@ -45,18 +52,28 @@ class Carousel extends React.Component {
 					<Animate
 							{...animations[this.props.animation].props}
 							duration={this.props.animationDuration}
+							animating={this.state.animating}
 							id={this.state.active}
 						>
 						{state => {
 							return this.props.children.map((child, key) => (
 								<article
 										key={`CarouselSlide${key}`}
-										style={animations[this.props.animation].style({
-											state,
-											key,
-											total: this.props.children.length,
-											...this.state
-										})}
+										style={
+											this.state.animating ?
+												animations[this.props.animation].style({
+													state,
+													key,
+													total: this.props.children.length,
+													...this.state
+												}) :
+												animations[this.props.animation].style({
+													state: animations[this.props.animation].props.to,
+													key,
+													total: this.props.children.length,
+													...this.state
+												})
+										}
 										className='CarouselSlide'
 									>
 									{child}
@@ -64,6 +81,16 @@ class Carousel extends React.Component {
 							))
 						}}
 					</Animate>
+					{this.props.dots && this.props.children.length > 1 &&
+						<Dots
+							total={this.props.children.length}
+							active={this.state.active}
+							changeSlide={this.changeSlide}
+							size={this.props.dotSize}
+							color={this.props.dotColor}
+							activeColor={this.props.dotActiveColor}
+							/>
+					}
 				</div>
 
 				<style jsx global>{`
@@ -114,6 +141,9 @@ Carousel.defaultProps = {
 	animation: 'slide',
 	animationDuration: 300,
 	background: '#fff',
+	dotColor: '#666',
+	dotActiveColor: '#000',
+	dotSize: 12,
 }
 
 export default Carousel
