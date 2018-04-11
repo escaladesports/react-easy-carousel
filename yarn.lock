@@ -92,9 +92,9 @@ align-text@^0.1.1, align-text@^0.1.3:
     longest "^1.0.1"
     repeat-string "^1.5.2"
 
-animate-x@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/animate-x/-/animate-x-1.0.1.tgz#2356f193aa53b2c61446b12d4e51ca8210b585d3"
+animate-x@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/animate-x/-/animate-x-1.0.3.tgz#17548d4edc573471b69686a1d972b09f1f0a9522"
   dependencies:
     babel-runtime "^6.26.0"
     clone "^1.0.4"
@@ -4937,11 +4937,11 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-animate-x@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-animate-x/-/react-animate-x-1.0.0.tgz#69292093f6f2b9edb48b525fe0243bcd34e46fbf"
+react-animate-x@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-animate-x/-/react-animate-x-1.0.1.tgz#b0f7b1f9a9a19bbbeb20696377a3892f1f59d422"
   dependencies:
-    animate-x "^1.0.1"
+    animate-x "^1.0.3"
     fast-deep-equal "^1.1.0"
 
 react-dom@^16.1.1:

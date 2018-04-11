@@ -102,18 +102,6 @@ class Carousel extends React.Component {
 							z-index: 2;
 						}
 					}
-
-					.CarouselAnimSlide{
-						.CarouselSlide{
-							display: none;
-						}
-						.CarouselPrevious, .CarouselActive{
-							display: block;
-						}
-						.CarouselInner{
-
-						}
-					}
 				`}</style>
 			</section>
 		)
@@ -123,7 +111,7 @@ class Carousel extends React.Component {
 Carousel.defaultProps = {
 	active: 0,
 	auto: 7000,
-	animation: 'fade',
+	animation: 'slide',
 	animationDuration: 300,
 	background: '#fff',
 }
