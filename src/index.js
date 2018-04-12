@@ -14,16 +14,17 @@ class Carousel extends React.Component {
 		this.state = {
 			active: this.props.active,
 			animating: false,
+			auto: true,
 		}
 		this.changeSlide = this.changeSlide.bind(this)
 		this.autoChange = this.autoChange.bind(this)
 	}
-	changeSlide(newSlide){
-		console.log(`Changing to ${newSlide}`)
+	changeSlide(newSlide, auto = false){
 		this.setState({
 			previous: this.state.active,
 			active: newSlide,
 			animating: true,
+			auto,
 		})
 		this.resetTimeout()
 	}
@@ -33,7 +34,7 @@ class Carousel extends React.Component {
 			if(next >= this.props.children.length){
 				next = 0
 			}
-			this.changeSlide(next)
+			this.changeSlide(next, true)
 		}
 	}
 	resetTimeout() {
