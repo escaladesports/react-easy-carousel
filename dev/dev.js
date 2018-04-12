@@ -12,6 +12,7 @@ class Container extends React.Component{
 				<Carousel
 						animation='slide'
 						dots
+						overlay={<div>Overlay</div>}
 					>
 					<div className='first'>0</div>
 					<div className='second'>1</div>

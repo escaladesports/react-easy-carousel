@@ -82,6 +82,9 @@ class Carousel extends React.Component {
 							))
 						}}
 					</Animate>
+					{this.props.overlay &&
+						<div className='CarouselOverlay'>{this.props.overlay}</div>
+					}
 					{this.props.dots && this.props.children.length > 1 &&
 						<Dots
 							total={this.props.children.length}
@@ -104,7 +107,7 @@ class Carousel extends React.Component {
 						position: relative;
 						overflow: hidden;
 					}
-					.CarouselInner, .CarouselSlide{
+					.CarouselInner, .CarouselSlide, .CarouselOverlay{
 						position: absolute;
 						top: 0;
 						right: 0;
@@ -114,21 +117,8 @@ class Carousel extends React.Component {
 					.CarouselInner{
 						background: ${this.props.background};
 					}
-
-					.CarouselAnimFade{
-						.CarouselSlide{
-							opacity: 0;
-							transition: opacity ${this.props.animationDuration}ms;
-						}
-						.CarouselPrevious, .CarouselActive{
-							opacity: 1;
-						}
-						.CarouselPrevious{
-							z-index: 1;
-						}
-						.CarouselActive{
-							z-index: 2;
-						}
+					.CarouselOverlay{
+						z-index: 10;
 					}
 				`}</style>
 			</section>
