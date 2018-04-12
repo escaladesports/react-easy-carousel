@@ -13,36 +13,15 @@ class Container extends React.Component{
 						animation='slide'
 						dots
 						overlay={<div>Overlay</div>}
+						fitToChildren
 					>
-					<div className='first'>0</div>
-					<div className='second'>1</div>
-					<div className='third'>2</div>
+					<img src='http://via.placeholder.com/600x400?text=First' />
+					<img src='http://via.placeholder.com/600x400?text=Second' />
+					<img src='http://via.placeholder.com/600x400?text=Third' />
 				</Carousel>
 				<style jsx>{`
-					main{
+					img{
 						width: 100%;
-						height: 800px;
-						max-height: 60vh;
-					}
-					div{
-						position: absolute;
-						top: 0;
-						left: 0;
-						right: 0;
-						bottom: 0;
-						font-size: 2em;
-					}
-					.first{
-						background: #999;
-						color: #fff;
-					}
-					.second{
-						background: #aaa;
-						color: #fff;
-					}
-					.third{
-						background: #fff;
-						color: black;
 					}
 				`}</style>
 			</main>

@@ -47,8 +47,9 @@ class Carousel extends React.Component {
 		this.resetTimeout()
 	}
 	render(){
+		let classes = ['Carousel']
 		return (
-			<section className={`Carousel ${`CarouselAnim${cap(this.props.animation)}`}`}>
+			<section className={classes.join(' ')}>
 				<div className='CarouselInner'>
 					<Animate
 							{...animations[this.props.animation].props}
@@ -57,29 +58,35 @@ class Carousel extends React.Component {
 							id={this.state.active}
 						>
 						{state => {
-							return this.props.children.map((child, key) => (
-								<article
-										key={`CarouselSlide${key}`}
-										style={
-											this.state.animating ?
-												animations[this.props.animation].style({
-													state,
-													key,
-													total: this.props.children.length,
-													...this.state
-												}) :
-												animations[this.props.animation].style({
-													state: animations[this.props.animation].props.to,
-													key,
-													total: this.props.children.length,
-													...this.state
-												})
-										}
-										className='CarouselSlide'
-									>
-									{child}
-								</article>
-							))
+							return this.props.children.map((child, key) => {
+								let classes = ['CarouselSlide']
+								if(key === this.state.active){
+									classes.push('CarouselSlideActive')
+								}
+								return (
+									<article
+											key={`CarouselSlide${key}`}
+											style={
+												this.state.animating ?
+													animations[this.props.animation].style({
+														state,
+														key,
+														total: this.props.children.length,
+														...this.state
+													}) :
+													animations[this.props.animation].style({
+														state: animations[this.props.animation].props.to,
+														key,
+														total: this.props.children.length,
+														...this.state
+													})
+											}
+											className={classes.join(' ')}
+										>
+										{child}
+									</article>
+								)
+							})
 						}}
 					</Animate>
 					{this.props.overlay &&
@@ -99,20 +106,21 @@ class Carousel extends React.Component {
 
 				<style jsx global>{`
 					.Carousel{
+						position: relative;
+						overflow: hidden;
 						&, *, *:after, *:before{
 							box-sizing: inherit;
 						}
-						width: 100%;
-						height: 100%;
-						position: relative;
-						overflow: hidden;
 					}
-					.CarouselInner, .CarouselSlide, .CarouselOverlay{
+					.CarouselSlide, .CarouselOverlay{
 						position: absolute;
 						top: 0;
 						right: 0;
 						bottom: 0;
 						left: 0;
+					}
+					.CarouselSlideActive{
+						position: static;
 					}
 					.CarouselInner{
 						background: ${this.props.background};
