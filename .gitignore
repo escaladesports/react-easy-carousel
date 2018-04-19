@@ -21,7 +21,6 @@ dist-es5/
 dist-modules/
 coverage/
 .eslintcache
-.postcssrc
 webpack.config.js
 .babelrc
 
