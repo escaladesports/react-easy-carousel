@@ -30,6 +30,23 @@ import Carousel from 'react-easy-carousel'
 </Carousel>
 ```
 
+Or if you need custom controls, like thumbnails:
+
+```jsx
+import Carousel from 'react-easy-carousel'
+
+...
+
+<Carousel
+   animation='slide'
+   buttons={slideNumber => <img src={`/thumbnail-${slideNumber}.jpg`} />}
+   >
+	<img src='http://via.placeholder.com/600x400?text=First' />
+	<img src='http://via.placeholder.com/600x400?text=Second' />
+	<img src='http://via.placeholder.com/600x400?text=Third' />
+</Carousel>
+```
+
 ## Options
 
 Property | Description | Default
@@ -43,3 +60,4 @@ dots | Shows control buttons at the bottom of the carousel | `false`
 dotColor | The color of the dot controls | `"#666"`
 dotActiveColor | The color of the active dot button | `"#000"`
 dotSize | The dot size in pixels | `12`
+buttons | Pass in a function to create custom control buttons | n/a

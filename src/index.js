@@ -92,6 +92,19 @@ class Carousel extends React.Component {
 					{this.props.overlay &&
 						<div className='CarouselOverlay'>{this.props.overlay}</div>
 					}
+					{this.props.buttons && this.props.children.length > 1 &&
+						<div className='CarouselButtons'>
+							{this.props.children.map((child, key) => (
+								<div
+									className='CarouselButton'
+									key={`CarouselButton${key}`}
+									onClick={() => this.changeSlide(key)}
+									>
+									{ this.props.buttons(key) }
+								</div>
+							))}
+						</div>
+					}
 					{this.props.dots && this.props.children.length > 1 &&
 						<Dots
 							total={this.props.children.length}
@@ -118,6 +131,18 @@ class Carousel extends React.Component {
 						right: 0;
 						bottom: 0;
 						left: 0;
+					}
+					.CarouselButtons{
+						position: absolute;
+						bottom: 10px;
+						left: 50%;
+						transform: translateX(-50%);
+						z-index: 10;
+					}
+					.CarouselButton{
+						display: inline-block;
+						margin: 0 5px;
+						cursor: pointer;
 					}
 					.CarouselSlideActive{
 						position: static;

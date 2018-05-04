@@ -11,7 +11,7 @@ class Container extends React.Component{
 			<main>
 				<Carousel
 						animation='slide'
-						dots
+						buttons={n => <div>{n}</div>}
 						overlay={<div>Overlay</div>}
 						fitToChildren
 					>
