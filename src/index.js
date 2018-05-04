@@ -58,7 +58,9 @@ class Carousel extends React.Component {
 							id={this.state.active}
 						>
 						{state => {
-							return this.props.children.map((child, key) => {
+							//console.log('children', this.props.children)
+							const res = this.props.children.map((child, key) => {
+								//console.log('child', child)
 								let classes = ['CarouselSlide']
 								if(key === this.state.active){
 									classes.push('CarouselSlideActive')
@@ -87,6 +89,8 @@ class Carousel extends React.Component {
 									</article>
 								)
 							})
+							//console.log('res', res)
+							return <div>{res}</div>
 						}}
 					</Animate>
 					{this.props.overlay &&
