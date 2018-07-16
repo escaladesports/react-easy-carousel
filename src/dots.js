@@ -23,7 +23,7 @@ class Dots extends React.Component{
 		return (
 			<div className='CarouselDots'>
 				{ dots }
-				<style jsx global>{`
+				<style dangerouslySetInnerHTML={{__html: `
 					.CarouselDots{
 						position: absolute;
 						bottom: 10px;
@@ -43,7 +43,7 @@ class Dots extends React.Component{
 					.CarouselDotActive{
 						background-color: ${this.props.activeColor};
 					}
-				`}</style>
+				`}} />
 			</div>
 		)
 	}

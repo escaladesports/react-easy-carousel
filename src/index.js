@@ -121,13 +121,16 @@ class Carousel extends React.Component {
 					}
 				</div>
 
-				<style jsx global>{`
+				<style dangerouslySetInnerHTML={{__html: `
 					.Carousel{
 						position: relative;
 						overflow: hidden;
-						&, *, *:after, *:before{
-							box-sizing: inherit;
-						}
+					}
+					.Carousel,
+					.Carousel *,
+					.Carousel *::after,
+					.Carousel *::before{
+						box-sizing: inherit;
 					}
 					.CarouselSlide, .CarouselOverlay{
 						position: absolute;
@@ -157,7 +160,7 @@ class Carousel extends React.Component {
 					.CarouselOverlay{
 						z-index: 10;
 					}
-				`}</style>
+				`}} />
 			</section>
 		)
 	}
