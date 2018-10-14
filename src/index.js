@@ -4,12 +4,12 @@ import Animate from 'react-animate-x'
 import animations from './animations'
 import Dots from './dots'
 
-function cap(string){
+function cap(string) {
 	return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
 class Carousel extends React.Component {
-	constructor(props){
+	constructor(props) {
 		super(props)
 		this.state = {
 			active: this.props.active,
@@ -19,7 +19,7 @@ class Carousel extends React.Component {
 		this.changeSlide = this.changeSlide.bind(this)
 		this.autoChange = this.autoChange.bind(this)
 	}
-	changeSlide(newSlide, auto = false){
+	changeSlide(newSlide, auto = false) {
 		this.setState({
 			previous: this.state.active,
 			active: newSlide,
@@ -28,10 +28,10 @@ class Carousel extends React.Component {
 		})
 		this.resetTimeout()
 	}
-	autoChange(){
-		if(this.props.auto){
+	autoChange() {
+		if (this.props.auto) {
 			let next = this.state.active + 1
-			if(next >= this.props.children.length){
+			if (next >= this.props.children.length) {
 				next = 0
 			}
 			this.changeSlide(next, true)
@@ -43,48 +43,51 @@ class Carousel extends React.Component {
 			this.timeout = setTimeout(this.autoChange, this.props.auto)
 		}
 	}
-	componentDidMount(){
+	componentDidMount() {
 		this.resetTimeout()
 	}
-	render(){
+	componentWillUnmount() {
+		clearTimeout(this.timeout)
+	}
+	render() {
 		let classes = ['Carousel']
 		return (
 			<section className={classes.join(' ')}>
 				<div className='CarouselInner'>
 					<Animate
-							{...animations[this.props.animation].props}
-							duration={this.props.animationDuration}
-							animating={this.state.animating}
-							id={this.state.active}
-						>
+						{...animations[this.props.animation].props}
+						duration={this.props.animationDuration}
+						animating={this.state.animating}
+						id={this.state.active}
+					>
 						{state => {
 							//console.log('children', this.props.children)
 							const res = this.props.children.map((child, key) => {
 								//console.log('child', child)
 								let classes = ['CarouselSlide']
-								if(key === this.state.active){
+								if (key === this.state.active) {
 									classes.push('CarouselSlideActive')
 								}
 								return (
 									<article
-											key={`CarouselSlide${key}`}
-											style={
-												this.state.animating ?
-													animations[this.props.animation].style({
-														state,
-														key,
-														total: this.props.children.length,
-														...this.state
-													}) :
-													animations[this.props.animation].style({
-														state: animations[this.props.animation].props.to,
-														key,
-														total: this.props.children.length,
-														...this.state
-													})
-											}
-											className={classes.join(' ')}
-										>
+										key={`CarouselSlide${key}`}
+										style={
+											this.state.animating ?
+												animations[this.props.animation].style({
+													state,
+													key,
+													total: this.props.children.length,
+													...this.state
+												}) :
+												animations[this.props.animation].style({
+													state: animations[this.props.animation].props.to,
+													key,
+													total: this.props.children.length,
+													...this.state
+												})
+										}
+										className={classes.join(' ')}
+									>
 										{child}
 									</article>
 								)
@@ -103,8 +106,8 @@ class Carousel extends React.Component {
 									className='CarouselButton'
 									key={`CarouselButton${key}`}
 									onClick={() => this.changeSlide(key)}
-									>
-									{ this.props.buttons(key) }
+								>
+									{this.props.buttons(key)}
 								</div>
 							))}
 						</div>
@@ -117,11 +120,12 @@ class Carousel extends React.Component {
 							size={this.props.dotSize}
 							color={this.props.dotColor}
 							activeColor={this.props.dotActiveColor}
-							/>
+						/>
 					}
 				</div>
 
-				<style dangerouslySetInnerHTML={{__html: `
+				<style dangerouslySetInnerHTML={{
+					__html: `
 					.Carousel{
 						position: relative;
 						overflow: hidden;
